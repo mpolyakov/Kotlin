@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">KotlinNotes</string>
+    <string name="question">Внимание, вопрос</string>
+</resources>
