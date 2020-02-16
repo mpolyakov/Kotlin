@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">KotlinNotes</string>
     <string name="question">Внимание, вопрос</string>
+    <string name="tV_title">Как же сложно работать с БД SQL в Андроид</string>
+    <string name="tV_body">Нужна туча вспомогательных классов, чтобы занести в базу данных 4 текстовых поля..</string>
+    <string name="toolbar_title">KotNote</string>
+    <string name="new_note_title">Новая заметка</string>
 </resources>
