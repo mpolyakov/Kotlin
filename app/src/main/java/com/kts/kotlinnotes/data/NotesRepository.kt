@@ -1,73 +1,32 @@
 package com.kts.kotlinnotes.data
 
+import android.provider.ContactsContract
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.kts.kotlinnotes.data.entity.Note
+import com.kts.kotlinnotes.data.model.NoteResult
+import com.kts.kotlinnotes.data.provider.RemoteDataProvider
 import java.util.*
 
 object NotesRepository {
 
-    private val notesLiveData = MutableLiveData<List<Note>>()
-
-    private val notes: MutableList<Note> = mutableListOf(
-            Note(
-                    UUID.randomUUID().toString(),
-                    "Заметка 1",
-                    "Текст заметки 1. Не очень длинный, но интересный",
-                    Note.Color.WHITE
-            ),
-            Note(
-                    UUID.randomUUID().toString(),
-                    "Заметка 2",
-                    "Текст заметки 2. Не очень длинный, но интересный",
-                    Note.Color.YELLOW
-            ),
-            Note(
-                    UUID.randomUUID().toString(),
-                    "Заметка 3",
-                    "Текст заметки 3. Не очень длинный, но интересный",
-                    Note.Color.GREEN
-            ),
-            Note(
-                    UUID.randomUUID().toString(),
-                    "Заметка 4",
-                    "Текст заметки 4. Не очень длинный, но интересный",
-                    Note.Color.BLUE
-            ),
-            Note(
-                    UUID.randomUUID().toString(),
-                    "Заметка 5",
-                    "Текст заметки 5. Не очень длинный, но интересный",
-                    Note.Color.VIOLET
-            ),
-            Note(
-                    UUID.randomUUID().toString(),
-                    "Заметка 6",
-                    "Текст заметки 6. Не очень длинный, но интересный",
-                    Note.Color.PINK
-            )
-    )
-
-    init {
-        notesLiveData.value = notes
-    }
-
-    fun saveNote(note: Note){
-        addOrReplace(note)
-        notesLiveData.value = notes
-    }
-
-    private fun addOrReplace(note: Note){
-        for(i in notes.indices){
-            if(notes[i] == note){
-                notes[i] = note
-                return
-            }
+    private val remoteProvider: RemoteDataProvider = object : RemoteDataProvider {
+        override fun subscribeToAllNotes(): LiveData<NoteResult> {
+            return MutableLiveData<NoteResult>()
         }
-        notes.add(note)
+
+        override fun getNoteById(id: String): LiveData<NoteResult> {
+            return MutableLiveData<NoteResult>()
+        }
+
+        override fun saveNote(note: Note): LiveData<NoteResult> {
+            return MutableLiveData<NoteResult>()
+        }
+
     }
 
-    fun getNotes(): LiveData<List<Note>> {
-        return notesLiveData
-    }
+    fun getNotes(): LiveData<NoteResult> = remoteProvider.subscribeToAllNotes()
+    fun saveNote(note: Note) : LiveData<NoteResult> = remoteProvider.saveNote(note)
+    fun getNoteById(id : String) = remoteProvider.getNoteById(id)
+
 }
