@@ -16,5 +16,6 @@ object NotesRepository {
     fun getNotes(): LiveData<NoteResult> = remoteProvider.subscribeToAllNotes()
     fun saveNote(note: Note) : LiveData<NoteResult> = remoteProvider.saveNote(note)
     fun getNoteById(id : String) = remoteProvider.getNoteById(id)
+    fun getCurrentUser() = remoteProvider.getCurrentUser()
 
 }
