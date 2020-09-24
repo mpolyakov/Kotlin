@@ -5,4 +5,5 @@
     <string name="tV_body">Нужна туча вспомогательных классов, чтобы занести в базу данных 4 текстовых поля..</string>
     <string name="toolbar_title">KotNote</string>
     <string name="new_note_title">Новая заметка</string>
+    <string name="logout_menu_title">Выход</string>
 </resources>
